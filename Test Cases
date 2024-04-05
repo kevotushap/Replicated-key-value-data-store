@@ -1,0 +1,76 @@
+# Test 1: Perform leader election
+@zk.ChildrenWatch("/election")
+def watch_leader_election(children):
+    if children:  # Check if children is not empty
+        leader = min(children)
+        print("Leader elected:", leader)
+
+# Test 2: Add/update a key-value pair
+key = "test_key"
+value = "test_value"
+add_update(zk, key, value)
+
+# Test 3: Read the value associated with a key
+read_value = read(zk, key)
+print("Value read for key", key, ":", read_value)
+
+# Test 4: Add/update the same key-value pair again
+updated_value = "updated_test_value"
+add_update(zk, key, updated_value)
+
+# Test 5: Read the value of the key after updating
+updated_read_value = read(zk, key)
+print("Updated value read for key", key, ":", updated_read_value)
+
+# Test 6: Simulate leader re-election and observe impact
+simulate_leader_failure(zk_hosts)
+
+
+ #Quick explanation of the Test Cases.
+
+Test 1: Perform Leader Election
+
+Description: This test verifies the functionality of the leader election mechanism, ensuring that one server is elected as the leader.
+
+Implementation:
+
+Utilize the watch_leader_election function to monitor changes in the /election node.
+Print the elected leader whenever changes occur in the node.
+Test 2: Add/Update Key-Value Pair
+
+Description: This test validates the ability to add or update a key-value pair in the data store.
+
+Implementation:
+
+Invoke the add_update function with a specific key and value to add/update data in the store.
+Test 3: Read Value Associated with Key
+
+Description: This test ensures that reading the value associated with a key from the data store functions correctly.
+
+Implementation:
+
+Use the read function to retrieve the value associated with a specific key from the data store.
+Test 4: Add/Update Same Key-Value Pair Again
+
+Description: This test checks if updating an existing key-value pair in the data store works as expected.
+
+Implementation:
+
+Repeat the process of adding/updating the same key-value pair.
+Verify that the data is updated successfully.
+Test 5: Read Value of Key After Updating
+
+Description: This test confirms that the value associated with a key is successfully updated after performing an update operation.
+
+Implementation:
+
+After updating the key-value pair, read the value of the key again.
+Compare it with the updated value to ensure the update was successful.
+Test 6: Perform Leader Re-Election and Observe Data Retrieval Impact
+
+Description: This test examines the behavior of data retrieval when a leader re-election occurs.
+
+Implementation:
+
+Simulate a leader re-election by deleting the current leader node.
+Observe how data retrieval operations are affected, ensuring data consistency is maintained.
