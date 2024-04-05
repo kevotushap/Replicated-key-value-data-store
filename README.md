@@ -21,13 +21,15 @@ Execute the test script (test_script.py) to verify the functionality of the repl
 bash
 Copy code
 $ python test_script.py
-   Test Cases
+
+          Test Cases
 Test 1: Perform leader election to select a leader server.
 Test 2: Add/update a key-value pair in the data store.
 Test 3: Read the value associated with a key from the data store.
 Test 4: Add/update the same key-value pair again to test updating functionality.
 Test 5: Read the value of the key after updating to verify successful update.
 Test 6: Perform leader re-election and observe the impact on data retrieval.
+
     Additional Notes
 Ensure that ZooKeeper servers are running and properly configured before starting the server program.
 Each server should have a unique ID for identification during leader election.
